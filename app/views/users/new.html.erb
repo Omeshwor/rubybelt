@@ -1,0 +1,50 @@
+ <div class="col-6">
+  <div class="container">
+    <h4>Sign Up</h4>
+    <form action="/users" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" name="user[first_name]" placeholder="First Name">
+      </div>
+      <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" class="form-control" name="user[last_name]" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+          <label for="first_name">Email Name</label>
+          <input type="text" class="form-control" name="user[email]" placeholder="Email">
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="user[password]" placeholder="Password">
+      </div>
+      <div class="form-group">
+          <label for="password_confirmation">Password Confimation</label>
+          <input type="password" class="form-control" name="user[password_confirmation]" placeholder="Password Confirmation">
+      </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary">Add User</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-6">
+  <div class="container">
+    <h4>Login</h4>
+      <form class="form-group" action="/sessions/new" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-xl-success">Login</button>
+          </div>
+      </form>
+  </div>
+</div>
