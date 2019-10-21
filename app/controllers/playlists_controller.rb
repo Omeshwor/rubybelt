@@ -1,18 +1,21 @@
 class PlaylistsController < ApplicationController
+  before_action :logged_in_user
+
   def new
     @playlist = UserPlaylist.new
   end
 
   def create
-    @playlist = UserPlaylist.new(playlist_params)
-    if @playlist.save
-      flash[:success] = "Added successfully"
-      redirect_to songs_path
-    else
-      flash[:error] = "Unable to add"
-      redirect_to songs_path
-    end
+    @playlist = UserPlaylist.create(playlist_params)
+    redirect_to songs_path
   end
+
+  def destroy
+    @playlist = UserPlaylist.find(params[:id])
+    @like.destroy
+    redirect_to songs_path
+  end
+
 
 
   private

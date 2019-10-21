@@ -5,6 +5,10 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
+  def show
+    @song = Song.find(params[:id])
+  end
+
 
   def new
     @song = Song.new
@@ -16,19 +20,15 @@ class SongsController < ApplicationController
       flash[:success] = "Song successfully Added to the database"
       redirect_to songs_path
     else
-      flash[:errors] = "Something went wrong"
+      flash[:errors] = @song.errors.full_messages
       redirect_to songs_path
     end
 
   end
 
-  def show
-    @song = Song.find(params[:id])
-  end
-
   private
   def song_params
-    params.require(:song).permit(:artist, :title)
+    params.require(:song).permit(:artist, :title).merge(user: User.find(current_user))
   end
 
 end
