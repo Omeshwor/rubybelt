@@ -8,14 +8,11 @@
       <th scope="col">Times Added</th>
     </tr>
   </thead>
+  <% @user.songs.each do |song| %>
   <tbody>
-    <% @songs.each do |song| %>
-    <tr>
-      <td><%= song.artist %></td>
-      <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
-      <td><%= song.user_playlists.count %>
-      </td>
-    </tr>
+    <td><%= song.artist %></td>
+    <td><%= song.title %></td> 
+    <td><%= song.user_playlists.where(song: song).where(user: @user.id).count %></td>
     <% end %>
   </tbody>
 </table>

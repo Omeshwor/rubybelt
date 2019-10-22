@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :user_playlists dependent: :destroy
+  has_many :user_playlists, dependent: :destroy
   has_many :songs
   has_many :added_songs, through: :user_playlists, source: :song
   before_save :downcase_email

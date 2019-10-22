@@ -1,23 +1,50 @@
-<h1>Songs Count</h1>
-<h1>Others who added <%= @song.artist%> <%= @song.title %></h1>
+<h1>Hello! <%= current_user.first_name %> <%= current_user.last_name %></h1>
+<a type="button" href="/users/<%= current_user.id %>">User</a>
 <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">User Name</th>
+      <th scope="col">Artist</th>
       <th scope="col">Title</th>
       <th scope="col">Times Added</th>
+      <th scope=col>Add to playlist</th>
     </tr>
   </thead>
   <tbody>
-    <% @song.user_playlists.user_id.each do |user| %>
+     <% @songs.each do |song| %>
     <tr>
-      <td><%= user.first_name %></td>
-      <td><%= @song.title %></td>
-      <td><% if !@song.user_playlists.empty? %>
-        <%= @song.user_playlists.count %>
+      <td><%= song.artist %></td>
+      <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
+      <td><% if !song.user_playlists.empty? %>
+        <%= song.user_playlists.count %>
         <% end %>
+      </td>
+      <td>
+        <form action="/playlists" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="pl[song_id]" value="<%= song.id %>">
+          <input type="hidden" name="pl[user_id]" value="<%= current_user.id %>">
+        <button type="submit" id="add">Add to Playlist</button>
+      </form>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="container">
+  <h4>Sign Up</h4>
+  <form action="/songs" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class="form-group">
+        <label for="artist">Artist</label>
+        <input type="text" class="form-control" name="song[artist]" placeholder="Artist">
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="song[title]" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Song</button>
+    </div>
+  </form>
+</div>

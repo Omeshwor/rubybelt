@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       flash[:notice] = "User successfully created!"
       session[:id] = @user.id
       current_user = @user
-      redirect_to songs_path
+      redirect_to user_path(current_user)
     else
       flash[:errors]= @user.errors.full_messages
       redirect_to new_user_path
@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @songs = Song.all
   end
 
   def edit

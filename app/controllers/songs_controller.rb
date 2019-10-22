@@ -28,7 +28,7 @@ class SongsController < ApplicationController
 
   private
   def song_params
-    params.require(:song).permit(:artist, :title).merge(user: User.find(current_user))
+    params.require(:song).permit(:artist, :title).merge(user: User.find(current_user.id))
   end
 
 end
