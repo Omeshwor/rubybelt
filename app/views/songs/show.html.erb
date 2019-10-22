@@ -9,13 +9,13 @@
   </thead>
   <% @song.users.uniq.each do |user| %>
   <tbody>
-    
+
     <tr>
       <td><%= user.first_name %></td>
       <td><%= @song.title %></td>
-      <td><%= @song.user_playlists.count %></td>
+      <td><%= @song.user_playlists.where(user_id: user.id).count %></td>
     </tr>
-   
+
   </tbody>
   <% end %>
 </table>
